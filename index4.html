@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: rgb(9, 14, 51);
+        }
+
+        section {
+            padding-left: 20px;
+            padding-right: 20px;
+            scroll-margin-top: 80px;
+        }
+
+        nav {
+            background-color: #0f172a;
+            display: flex;
+            justify-content: end;
+            z-index: 50;
+            position: fixed;
+            width: 100%;
+        }
+
+        nav li {
+            list-style: none;
+            margin: 20px 20px;
+        }
+
+        li a {
+            text-decoration: none;
+            color: #f1f5f9;
+        }
+
+        li a:hover {
+            color: #60a5fa;
+            transition: 0.3s;
+        }
+
+
+        .hero {
+            padding-top: 90px;
+            padding-bottom: 20px;
+            background: linear-gradient(to bottom, rgb(51, 72, 205), rgb(17, 27, 78));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .profile {
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            padding-top: 10px;
+            padding-bottom: 5px;
+        }
+
+        .about {
+            padding: 40px;
+            background: linear-gradient(to bottom, rgb(17, 27, 78), rgb(14, 23, 66));
+        }
+
+        .about h1 {
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .about p {
+            text-align: center;
+        }
+
+        .skills {
+            padding: 20px 40px;
+            background: linear-gradient(to bottom, rgb(14, 23, 66), rgb(9, 14, 51));
+        }
+
+        .skills h1 {
+            padding-bottom: 15px;
+        }
+
+        .skillsGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            text-align: center;
+        }
+
+        .skillCard {
+            width: fit-content;
+            border-radius: 10px;
+            padding: 7px 10px;
+            margin-bottom: 10px;
+            background-color: #151a4c;
+        }
+
+        .skillCard h2 {
+            padding-bottom: 2px;
+            font-size: small;
+        }
+
+        .projects {
+            background-color: rgb(9, 14, 51);
+            padding: 20px 40px;
+        }
+
+        .projects h1 {
+            padding-bottom: 15px;
+        }
+
+        .projectsGrid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .projectCard {
+            border-radius: 10px;
+            padding: 15px 20px;
+            background-color: #151a4c;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .projectCard:hover {
+            background-color: #1b2153;
+            box-shadow: 2px 4px 10px #292e5a;
+            transform: translateY(-5px);
+        }
+
+        .projectCard h2 {
+            padding-bottom: 5px;
+            font-size: larger;
+        }
+
+        .projectCard p {
+            font-size: small;
+            padding-bottom: 4px;
+        }
+
+        .projectCard a {
+            font-size: small;
+            text-decoration: none;
+            color: rgb(92, 102, 255);
+        }
+
+        .experience {
+            background-color: rgb(9, 14, 51);
+            padding: 20px 40px;
+        }
+
+        .experience h1 {
+            padding-bottom: 15px;
+        }
+
+        .expreienceGrid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            justify-content: start;
+        }
+
+        .job {
+            width: fit-content;
+            border-radius: 10px;
+            padding: 15px 20px;
+            background-color: #151a4c;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .job:hover {
+            background-color: #1b2153;
+            box-shadow: 2px 4px 10px #292e5a;
+            transform: translateY(-5px);
+        }
+
+        .job h2 {
+            font-size: 21px;
+            padding-bottom: 7px;
+        }
+
+        .job p {
+            font-size: 15px;
+            padding-bottom: 1px;
+        }
+
+        .job li {
+            font-size: small;
+            padding-bottom: 2px;
+        }
+
+        .contact {
+            background-color: rgb(9, 14, 51);
+            padding: 20px 40px;
+        }
+
+        .contact h1 {
+            padding-bottom: 15px;
+        }
+
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -200px;
+            width: 180px;
+            height: 100vh;
+            background-color: #0f172a;
+            padding-top: 60px;
+            transition: all 0.3s ease-in-out;
+            z-index: 99;
+        }
+
+        .sidebar.show-sidebar {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px 20px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sidebar ul li a:hover {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 500px) {
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </nav>
+
+    <section class="hero" id="home">
+        <img class="profile" src="profileImage.jpg" alt="Profile Picture">
+        <h1>Chetan Verma</h1>
+        <p style="font-weight: bold; font-size: large;">Web developer</p>
+        <p>B.Tech in Computer Science and Engineering</p>
+        <p>Second Year Student (2024–2028)</p>
+        <p style="font-weight: bold;">Indian Institute of Technology, Indore</p>
+    </section>
+
+    <section class="about">
+        <h1 style="font-size: 25px;">About Me</h1>
+        <p>I'm a <strong>Second-Year B.Tech student in Computer Science and Engineering at IIT Indore</strong>,
+            passionate about full-stack web development. I specialize in building dynamic and accessible
+            web applications.
+            I love turning complex ideas into clean, efficient, and elegant digital solutions.</p>
+        <p>
+            Currently, I’m exploring <strong>DBMS, Next.js</strong> and diving deeper into
+            <strong>API optimization</strong> and scalable backend design.
+            Beyond coding, I enjoy learning about UI/UX principles and experimenting with
+            creative web interfaces.
+        </p>
+    </section>
+
+    <section class="skills" id="skills">
+        <h1 style="text-align: center;font-size: 25px;">Skills</h1>
+        <div class="skillsGrid">
+            <div class="skillCard">
+                <h2>C++</h2>
+            </div>
+            <div class="skillCard">
+                <h2>Python</h2>
+            </div>
+            <div class="skillCard">
+                <h2>JavaScript</h2>
+            </div>
+            <div class="skillCard">
+                <h2>HTML</h2>
+            </div>
+            <div class="skillCard">
+                <h2>CSS</h2>
+            </div>
+            <div class="skillCard">
+                <h2>Node.Js</h2>
+            </div>
+            <div class="skillCard">
+                <h2>ExpressJs</h2>
+            </div>
+            <div class="skillCard">
+                <h2>MongoDB</h2>
+            </div>
+            <div class="skillCard">
+                <h2>MySQL</h2>
+            </div>
+            <div class="skillCard">
+                <h2>NextJs</h2>
+            </div>
+            <div class="skillCard">
+                <h2>TailwindCSS</h2>
+            </div>
+            <div class="skillCard">
+                <h2>NumPy</h2>
+            </div>
+            <div class="skillCard">
+                <h2>Pandas</h2>
+            </div>
+            <div class="skillCard">
+                <h2>MatplotLib</h2>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="projects" id="projects">
+        <h1 style="text-align: center; font-size: 25px">Projects</h1>
+        <div class="projectsGrid">
+
+            <div class="projectCard">
+                <h2>Portfolio Builder</h2>
+                <p>Developed a responsive portfolio generator that allows users to create and customize personal
+                    websites instantly. Built with a modern full-stack architecture for dynamic template rendering and
+                    data handling.</p>
+                <p><strong>Tech Stack:</strong> React.js, Node.js, Express.js, MongoDB, TailwindCSS, Three.js</p>
+                <a href="https://portofy.onrender.com/" target="_blank">Live URL</a>
+                <br>
+                <a href="https://github.com/Svaatsalya/IITISoC" target="_blank">GitHub</a>
+            </div>
+
+            <div class="projectCard">
+                <h2>Password Manager</h2>
+                <p>Created a secure web app to store and manage passwords locally using browser storage encryption.
+                    Features include password strength check and automatic password generation.</p>
+                <p><strong>Tech Stack:</strong> React.js, Node.js, Express.js, MongoDB, TailwindCSS</p>
+                <a href="https://github.com/codecv28/Password-Manager" target="_blank">GitHub</a>
+            </div>
+
+            <div class="projectCard">
+                <h2>CryptoMarket</h2>
+                <p>Designed a cryptocurrency price tracker using the CoinGecko API to display live market data, coin
+                    rankings, and percentage changes in real time.</p>
+                <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+                <a href="https://github.com/codecv28/CryptoMarket-" target="_blank">GitHub</a>
+            </div>
+
+            <div class="projectCard">
+                <h2>Weather App</h2>
+                <p>Built a real-time weather forecast app using the OpenWeather API. Displays temperature, humidity, and
+                    conditions for any city with an intuitive and responsive interface.</p>
+                <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, API Integration</p>
+                <a href="https://sprightly-cheesecake-6ea683.netlify.app/" target="_blank">Live URL</a>
+                <br>
+                <a href="https://github.com/codecv28/TheWeatherApp" target="_blank">GitHub</a>
+            </div>
+
+            <div class="projectCard">
+                <h2>Calculator</h2>
+                <p>Developed a simple and efficient calculator web app using HTML, CSS, and JavaScript. Supports basic
+                    arithmetic operations and a clean, mobile-friendly layout.</p>
+                <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+                <a href="https://codecv28.github.io/Calculator/" target="_blank">Live URL</a>
+                <br>
+                <a href="https://github.com/codecv28/Calculator" target="_blank">GitHub</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="experience" id="experience">
+        <h1 style="text-align: center;font-size: 25px">Experience</h1>
+        <div class="expreienceGrid">
+
+            <div class="job">
+                <h2>Full Stack Developer – Alumni Cell, IIT Indore</h2>
+                <p><strong>Duration:</strong> July 2025 – Present</p>
+                <p><strong>Location:</strong> Indore, India</p>
+                <ul>
+                    <li>Contributed to the development of the Alumni Portal by creating the <strong>Publications
+                            Section</strong> for hosting magazines and newsletters.</li>
+                    <li>Implemented an interactive <strong>flipbook-style viewer</strong> for seamless and engaging
+                        display of PDFs directly within the portal.</li>
+                    <li>Designed and integrated the backend architecture using <strong>Node.js, Express, and
+                            MongoDB</strong> to manage and store publication files efficiently.</li>
+                    <li>Developed a secure API to fetch and render stored PDF documents dynamically from the database.
+                    </li>
+                    <li>Ensured smooth frontend–backend integration and optimized loading performance for large
+                        publication files.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <h2>Web Development Team Member – Academic Council, IIT Indore</h2>
+                <p><strong>Duration:</strong> May 2025 – Present</p>
+                <p><strong>Location:</strong> Indore, India</p>
+                <ul>
+                    <li>Contributing to the design and development of the Academic Council’s official website using
+                        <strong>React, Node.js, Express, and MongoDB</strong>.</li>
+                    <li>Implemented a <strong>secure user authentication system</strong> featuring login and signup
+                        functionality for controlled content access.</li>
+                    <li>Collaborating with team members to define feature requirements and ensure alignment with
+                        institutional needs.</li>
+                    <li>Still the work is going on building the website.</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h1 style="text-align: center; font-size: 25px">Contact me</h1>
+        <div class="socials" style="display: flex; justify-content: center; gap: 20px;">
+            <a href="https://github.com/codecv28" target="_blank"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://www.linkedin.com/in/chetan-verma-a82239324/" target="_blank"><i
+                    class="fab fa-linkedin fa-lg"></i></a>
+            <a href="https://www.instagram.com/chetanverma_28/" target="_blank"><i
+                    class="fab fa-instagram fa-lg"></i></a>
+        </div>
+        <p style="text-align: center; padding-top: 10px; font-size: small;"><a href="abc@gmail.com"
+                style="text-decoration: none;">cse240001022@iiti.ac.in</a></p>
+    </section>
+
+    <!-- Hamburger Toggle -->
+    <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</body>
+<footer style="text-align: center; padding: 20px; background-color: #0f172a; color: #94a3b8;">
+    &copy; 2025 Chetan Verma. All rights reserved.
+</footer>
+
+<script>
+    const hamburger = document.getElementById("hamburger");
+    const sidebar = document.getElementById("sidebar");
+
+    hamburger.addEventListener("click", () => {
+        sidebar.classList.toggle("show-sidebar");
+    });
+
+    document.querySelectorAll(".sidebar a").forEach(link =>
+        link.addEventListener("click", () => sidebar.classList.remove("show-sidebar"))
+    );
+</script>
+
+</html>
